@@ -35,7 +35,7 @@ function generatePlaylist(guardians, songs) {
         const playlistDiv = document.createElement('div')
         playlistDiv.className = 'playlist'
 
-        const guardianHeading = document.createElement('h2')
+        const guardianHeading = document.createElement('h4')
         guardianHeading.textContent = `${guardian}'s Playlist`
         playlistDiv.appendChild(guardianHeading)
 
