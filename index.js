@@ -15,30 +15,50 @@ const songs = [
 ];
 
 
-
 // Object containing each Guardian's preferred genre
 const guardians = {
     "Star-Lord": "Rock",
     "Gamora": "Pop",
+    "Drax": "R&B",
+    "Rocket": "Rock",
+    "Groot": "Pop"
     // Add preferences for Drax, Rocket, and Groot
-    "Groot" : "R&B",
-    "Drax" : "R&B",
-    "Rocket" : "Rock"
 };
 
-
-// Function to generate playlist based on preferred genre
 function generatePlaylist(guardians, songs) {
-    // Use the map() function to create playlists for each Guardian
-    // Your code here
-    return Object.entries(gaurdians).map(({person, genre}) => {
-        const playlist = songs.filter((songs) => (genre) === songs.genre);
-        return { person, playlist}
-    }
-);
+    const playlistContainer = document.getElementById('playlists');
+
+    Object.keys(guardians).map(guardian => {
+        const genre = guardians[guardian]
+        const playlistSongs = songs.filter(song => song.genre === genre)
+        
+        const playlistDiv = document.createElement('div')
+        playlistDiv.className = 'playlist'
+
+        const guardianHeading = document.createElement('h2')
+        guardianHeading.textContent = `${guardian}'s Playlist`
+        playlistDiv.appendChild(guardianHeading)
+
+    playlistSongs.map(song => {
+        const songDiv = document.createElement('div')
+        songDiv.className = 'song'
+
+        const songTitle = document.createElement('p')
+        songTitle.className = 'song-title'
+        songTitle.textContent = song.title
+
+        const songArtist = document.createElement('p')
+        songArtist.textContent = `by ${song.artist}`
+
+       songDiv.appendChild(songTitle)
+       songDiv.appendChild(songArtist)
+       playlistDiv.appendChild(songDiv)
+    })
+
+    playlistContainer.appendChild(playlistDiv)
+    })
 }
 
-// Call generatePlaylist and display the playlists for each Guardian
-generatePlaylist(guardians, songs);
 
+generatePlaylist(guardians, songs);
 
