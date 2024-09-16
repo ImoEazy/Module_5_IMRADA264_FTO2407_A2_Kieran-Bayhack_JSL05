@@ -1,5 +1,5 @@
 // Array of song objects. Add at least 5 songs with title, artist, and genre properties.
-const songs = [ //This is an array of song objects. Each object contains a title, artist, and genre property.
+const songs = [ //This is an array of song objects. Each object contains a title, artist, and genre property in a string
     { title: "Hooked on a Feeling", artist: "Blue Swede", genre: "Pop" },
     { title: "Moonage Daydream", artist: "David Bowie", genre: "Rock" },
     { title: "I Want You Back", artist: "The Jackson 5", genre: "Pop" },
@@ -15,7 +15,7 @@ const songs = [ //This is an array of song objects. Each object contains a title
 ];
 
 // Object containing each Guardian's preferred genre
-const guardians = { // this const object maps each name to their specified genre/playlist
+const guardians = { // this 'const object' maps each name to their specified genre/playlist
     "Star-Lord": "Rock",
     "Gamora": "Pop",
     "Drax": "Rock",
@@ -26,34 +26,34 @@ const guardians = { // this const object maps each name to their specified genre
 // Function to generate playlist based on preferred genre
 function generatePlaylist(guardians, songs) {
     // Get the playlists div
-    const playlistsDiv = document.getElementById('playlists');//This gets a reference to an HTML element with the ID playlists, which is where the playlists will be displayed.
+    const playlistsDiv = document.getElementById('playlists');//This gets the HTML element reference 'div' with the ID playlists, where playlists will display.
     
     // Clear any existing content
-    playlistsDiv.innerHTML = '';//This ensures that any existing content within the playlists div is cleared before adding new content.
+    playlistsDiv.innerHTML = '';// ensures any content existing within the playlists div is cleared before adding new content.
     
     // Loop through each Guardian and create a playlist
-    for (const [guardian, genre] of Object.entries(guardians)) {//This loops over each entry in the guardians object. guardian represents the name of the Guardian, and genre is their preferred genre.
+    for (const [guardian, genre] of Object.entries(guardians)) {//loops over entries in the guardians object. 'guardian' represents name of the Guardian, 'genre' is their preferred genre.
         // Filter songs by genre
-        const filteredSongs = songs.filter(song => song.genre === genre);//This filters the songs array to include only those songs that match the current genre.
+        const filteredSongs = songs.filter(song => song.genre === genre);// filters songs array to include only songs that match the current genre.
         
         // Create a playlist container
-        const playlistDiv = document.createElement('div');//Creates a new div element for each Guardian's playlist and sets its inner HTML to include the Guardian's name as a heading.
+        const playlistDiv = document.createElement('div');//Creates a new div element for each Guardian's playlist,
         playlistDiv.className = 'playlist';
-        playlistDiv.innerHTML = `<h2>${guardian}'s Playlist</h2>`;
+        playlistDiv.innerHTML = `<h2>${guardian}'s Playlist</h2>`;//and enables inner HTML to include the Guardian's name as a heading
         
         // Add songs to the playlist
-        filteredSongs.forEach(song => {//Creates a div for each song in the filtered list, setting its class and inner HTML to show the song title and artist.
+        filteredSongs.forEach(song => {//Creates a div for each song in the filtered list, 
             const songDiv = document.createElement('div');
             songDiv.className = 'song';
-            songDiv.innerHTML = `<span class="song-title">${song.title}</span> by ${song.artist}`;
+            songDiv.innerHTML = `<span class="song-title">${song.title}</span> by ${song.artist}`;//setting its class and inner HTML to show the song title and artist
             playlistDiv.appendChild(songDiv);
         });
         
         // Append the playlist to the playlists div
-        playlistsDiv.appendChild(playlistDiv);//Adds the completed playlist container to the playlists div on the page.
+        playlistsDiv.appendChild(playlistDiv);//Add the new completed playlist 'container' to the playlists div on the page.
     }
 }
 
 // Call generatePlaylist and display the playlists for each Guardian
-generatePlaylist(guardians, songs);//This line calls the generatePlaylist function with the guardians and songs arrays to generate and display the playlists.
+generatePlaylist(guardians, songs);//calling the 'generatePlaylist' function so the guardians and songs arrays will generate and display the playlists.
 
