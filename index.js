@@ -14,51 +14,46 @@ const songs = [
     // Feel free to add even more songs
 ];
 
-
 // Object containing each Guardian's preferred genre
 const guardians = {
     "Star-Lord": "Rock",
     "Gamora": "Pop",
-    "Drax": "R&B",
-    "Rocket": "Rock",
+    "Drax": "Rock",
+    "Rocket": "R&B",
     "Groot": "Pop"
-    // Add preferences for Drax, Rocket, and Groot
 };
 
+// Function to generate playlist based on preferred genre
 function generatePlaylist(guardians, songs) {
-    const playlistContainer = document.getElementById('playlists');
-
-    Object.keys(guardians).map(guardian => {
-        const genre = guardians[guardian]
-        const playlistSongs = songs.filter(song => song.genre === genre)
+    // Get the playlists div
+    const playlistsDiv = document.getElementById('playlists');
+    
+    // Clear any existing content
+    playlistsDiv.innerHTML = '';
+    
+    // Loop through each Guardian and create a playlist
+    for (const [guardian, genre] of Object.entries(guardians)) {
+        // Filter songs by genre
+        const filteredSongs = songs.filter(song => song.genre === genre);
         
-        const playlistDiv = document.createElement('div')
-        playlistDiv.className = 'playlist'
-
-        const guardianHeading = document.createElement('h4')
-        guardianHeading.textContent = `${guardian}'s Playlist`
-        playlistDiv.appendChild(guardianHeading)
-
-    playlistSongs.map(song => {
-        const songDiv = document.createElement('div')
-        songDiv.className = 'song'
-
-        const songTitle = document.createElement('p')
-        songTitle.className = 'song-title'
-        songTitle.textContent = song.title
-
-        const songArtist = document.createElement('p')
-        songArtist.textContent = `by ${song.artist}`
-
-       songDiv.appendChild(songTitle)
-       songDiv.appendChild(songArtist)
-       playlistDiv.appendChild(songDiv)
-    })
-
-    playlistContainer.appendChild(playlistDiv)
-    })
+        // Create a playlist container
+        const playlistDiv = document.createElement('div');
+        playlistDiv.className = 'playlist';
+        playlistDiv.innerHTML = `<h2>${guardian}'s Playlist</h2>`;
+        
+        // Add songs to the playlist
+        filteredSongs.forEach(song => {
+            const songDiv = document.createElement('div');
+            songDiv.className = 'song';
+            songDiv.innerHTML = `<span class="song-title">${song.title}</span> by ${song.artist}`;
+            playlistDiv.appendChild(songDiv);
+        });
+        
+        // Append the playlist to the playlists div
+        playlistsDiv.appendChild(playlistDiv);
+    }
 }
 
-
+// Call generatePlaylist and display the playlists for each Guardian
 generatePlaylist(guardians, songs);
 
